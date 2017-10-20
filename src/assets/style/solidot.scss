@@ -1,5 +1,5 @@
 $color: green;
-$height: 200px;
+$height: 150px;
 
 :local {
   @keyframes ro {
@@ -22,13 +22,42 @@ $height: 200px;
   }
 
   .item {
-    width: 100%;
+    // width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
     height: $height;
     background-color: $color;
     margin-bottom: 10px;
+
     :global {
       // animation:ro 8s linear infinite forwards;
     }
+  }
+
+  .title {
+    height: $height/2;
+    margin: 0;
+  }
+
+  .dash {
+    width: 30%;
+    border-top: 1px solid #fff;
+    height: 4px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .from {
+    font-size: 14px;
+    height: $height/4;
+    text-align: right;
+  }
+
+  .date {
+    font-size: 14px;
+    text-align: right;
+    height: $height/4;
   }
 
   .list {

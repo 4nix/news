@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Item from './Item'
-import style from '@/assets/style/solidot.scss'
+import style from '../assets/style/solidot.scss'
 
 class List extends Component {
   constructor (props) {
@@ -8,14 +8,27 @@ class List extends Component {
     this.state = { list: [], page: 1 }
   }
 
+  // fetchData () {
+  //   fetch('http://api.local.com/list.php', {
+  //     method: 'POST',
+  //     body: ''
+  //   }).then(response => response.json())
+  //   .then(response => { 
+  //     console.log(response.data)
+  //     let data = [...this.state.list, ...response.data]
+  //     this.setState({ list: data })
+  //   })
+  // }
+
   fetchData () {
-    fetch('http://api.local.com/list.php', {
-      method: 'POST',
-      body: ''
-    }).then(response => response.json())
+    fetch('http://local.com/github/news/api/solidot/day.json', {
+      method: 'GET'
+    }).then(response => {
+      return response.json()
+    })
     .then(response => { 
-      console.log(response.data)
-      let data = [...this.state.list, ...response.data]
+      // console.log(response)
+      let data = [...this.state.list, ...response]
       this.setState({ list: data })
     })
   }
@@ -33,16 +46,17 @@ class List extends Component {
 
       if (scrollTop >= document.body.scrollHeight - window.innerHeight) {
         console.log(scrollTop, document.body.scrollHeight - window.innerHeight)
-        this.fetchData()
+        // this.fetchData()
       }
       
     }
   }
 
   render () {
+    console.log(this.state.list)
     return (
       <div className={style.list}>
-        { this.state.list.map(item => <Item subject={item.title}></Item>) }
+        { this.state.list.map(item => <Item item={item}></Item>) }
       </div>
     )
   }
