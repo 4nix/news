@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Item from './Item'
 import style from '../assets/style/solidot.scss'
+import config from '../config'
 
 class List extends Component {
   constructor (props) {
@@ -21,7 +22,7 @@ class List extends Component {
   // }
 
   fetchData () {
-    fetch('http://local.com/github/news/api/solidot/day.json', {
+    fetch(config.api, {
       method: 'GET'
     }).then(response => {
       return response.json()
@@ -56,7 +57,7 @@ class List extends Component {
     console.log(this.state.list)
     return (
       <div className={style.list}>
-        { this.state.list.map(item => <Item item={item}></Item>) }
+        { this.state.list.map((item, index) => <Item key={index} item={item}></Item>) }
       </div>
     )
   }
