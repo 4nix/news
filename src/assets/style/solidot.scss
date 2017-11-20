@@ -24,54 +24,93 @@ $positiveHeight: -180px;
     }
   }
 
+  @keyframes expandback {
+    0% {
+      height: $height;
+    }
+
+    100% {
+      height: auto;
+    }
+  }
+
+  @keyframes collapseback {
+    0% {
+      height: auto;
+    }
+
+    100% {
+      height: $height;
+    }
+  }
+
   .item {
-    position: relative;
+    // position: relative;
     margin-bottom: 10px;
     transform-style: preserve-3d;
-    height: $height + 30;
+    // height: $height + 30;
     :global {
       // animation:ro 8s linear infinite forwards;
     }
   }
 
-  .itemA {
-    composes: item;
+  .front {
+    // composes: item;
   }
 
-  .itemB {
-    composes: item;
+  .toback {
+    // composes: item;
     :global {
       animation: reverseback .6s linear forwards;
     }
   }
 
-  .itemC {
-    composes: item;
+  .tofront {
+    // composes: item;
     :global {
       animation: reversefront .6s linear forwards;
     }
   }
 
-  .itemSubject {
+  .expandback {
+    // composes: item;
+    :global {
+      animation: expandback .6s linear forwards;
+    }
+  }
+
+  .collapseback {
+    // composes: item;
+    :global {
+      animation: collapseback .6s linear forwards;
+    }
+  }
+
+  .test {
+    background-color: #aac;
+  }
+
+  .itemFront {
     height: $height;
     padding: 15px;
     font-size: 18px;
     color: #fff;
     background-color: $color;
-    position: relative;
+    // position: relative;
     z-index: 11;
     backface-visibility: hidden;
   }
 
-  .itemContent {
+  .itemBack {
     height: $height;
     padding: 15px;
     font-size: 18px;
     color: #fff;
     background-color: $bgcolor;
-    // margin-top: $positiveHeight;
-    position: relative;
-    top: $positiveHeight;
+    margin-top: $positiveHeight;
+    // position: relative;
+    // top: $positiveHeight;
+    // top: 0;
     // top: -40px;
     z-index: 10;
     transform: rotateY(-180deg);

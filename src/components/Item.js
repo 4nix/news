@@ -4,7 +4,26 @@ import style from '../assets/style/solidot.scss'
 class Item extends Component {
   constructor (props) {
     super(props)
-    this.state = { length: 80, init: true, click: false }
+    this.state = { 
+      length: 80, 
+      init: true, 
+      reverse: false, 
+      expand: false, 
+      class: '', 
+      backClass: '',
+      click: false, 
+      doubleClick: false, 
+      clickCount: 0, 
+      timer: null ,
+      content: '',
+      expandEnable: false
+    }
+  }
+
+  componentDidMount () {
+    // console.log('aa')
+    this.setState({ expandEnable: this.props.item.content.length > this.state.length })
+    this.setState({ content: this.formateContent(this.props.item.content) })
   }
 
   formateDate (timestamp) {
@@ -13,32 +32,62 @@ class Item extends Component {
   }
 
   formateContent (content) {
-    return content.length > this.state.length ? content.substr(0, this.state.length) + '...' : content
+    // console.log(this.state.expandEnable ? content.substr(0, this.state.length) + '...' : content)
+    return this.props.item.content.length > this.state.length  ? content.substr(0, this.state.length) + '...' : content
   }
 
   handleClick (e) {
-    this.setState({ init: false, click: this.state.click ^ 1 })
+    // this.setState({ init: false, click: this.state.click ^ 1 })
+
+    console.log(this.state.clickCount)
+    this.setState({ clickCount: ++this.state.clickCount })
+    this.checkClick()
+  }
+
+  checkClick () {
+    clearTimeout(this.state.timer)
+    let timer = setTimeout(() => {
+
+      if (this.state.clickCount > 1) {
+        // console.log(this.state.clickCount, '1')
+        this.setState({ doubleClick: true, click: false, clickCount: 0 })
+
+        if (this.state.reverse && this.state.expandEnable) {
+          this.setState({ content: this.state.expand ? this.formateContent(this.props.item.content): this.props.item.content })
+          console.log(this.state.content)
+          this.setState({ backClass: this.state.expand ? style.collapseback : style.expandback })
+          this.setState({ expand: !this.state.expand })
+        }
+      } else {
+        // console.log(this.state.clickCount, '2')
+        this.setState({ doubleClick: false, click: true, clickCount: 0 })
+        this.setState({ class: this.state.reverse ? style.tofront : style.toback, reverse: !this.state.reverse })
+        // console.log(this.state.reverse)
+      }
+    }, 400)
+
+    this.setState({ timer: timer })
   }
 
   render () {
     return (
-      <div className={ this.state.init ? style.itemA : (this.state.click ? style.itemB : style.itemC) } onClick={ e => this.handleClick(e) }>
-        <div className={style.itemSubject}>
+      <div className={ style.item + ' ' + this.state.class } onClick={ e => this.handleClick(e) }>
+        <div className={style.itemFront}>
           <h3 className={style.title}>
             { this.props.item.title }
           </h3>
           <div className={style.from}>
             <span className={style.dash}></span>
-            <span>{ this.props.item.from }</span>
+            <span>{ this.props.item.from || '匿名' }</span>
           </div>
           <div className={style.date}>
             { this.formateDate(this.props.item.timestamp) }
           </div>
         </div>
 
-        <div className={style.itemContent}>
+        <div className={ style.itemBack + ' ' + this.state.backClass }>
           <div className={style.content}>
-            { this.formateContent(this.props.item.content) }
+            { this.state.content }
           </div>
         </div>
       </div>
