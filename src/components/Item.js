@@ -44,25 +44,34 @@ class Item extends Component {
     this.checkClick()
   }
 
+  setToFront () {
+    this.setState({ class: style.tofront, reverse: false })
+  }
+
+  setToBack () {
+    this.setState({ class: style.toback, reverse: true })
+  }
+
+  setExpand () {
+    this.setState({ backClass: style.expandback, expand: true, content: this.props.item.content, })
+  }
+
+  setCollapse () {
+    this.setState({ backClass: style.collapseback, expand: false, content: this.formateContent(this.props.item.content) })
+  }
+
   checkClick () {
     clearTimeout(this.state.timer)
     let timer = setTimeout(() => {
 
-      if (this.state.clickCount > 1) {
+      if (this.state.clickCount > 1 && this.state.reverse) {
         // console.log(this.state.clickCount, '1')
         this.setState({ doubleClick: true, click: false, clickCount: 0 })
-
-        if (this.state.reverse && this.state.expandEnable) {
-          this.setState({ content: this.state.expand ? this.formateContent(this.props.item.content): this.props.item.content })
-          console.log(this.state.content)
-          this.setState({ backClass: this.state.expand ? style.collapseback : style.expandback })
-          this.setState({ expand: !this.state.expand })
-        }
+        this.state.expand ? this.setCollapse() : this.setExpand()
       } else {
         // console.log(this.state.clickCount, '2')
         this.setState({ doubleClick: false, click: true, clickCount: 0 })
-        this.setState({ class: this.state.reverse ? style.tofront : style.toback, reverse: !this.state.reverse })
-        // console.log(this.state.reverse)
+        this.state.reverse ? (this.state.expand ? this.setCollapse() : this.setToFront()) : this.setToBack()
       }
     }, 400)
 

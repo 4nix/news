@@ -1,3 +1,3 @@
 module.exports = {
-  api: 'api/solidot/day.json'
+  api: '/news/api/solidot/day.json'
 }

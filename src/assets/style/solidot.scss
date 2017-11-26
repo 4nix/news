@@ -26,21 +26,27 @@ $positiveHeight: -180px;
 
   @keyframes expandback {
     0% {
-      height: $height;
+      // height: $height;
+      max-height: $height;
     }
 
     100% {
-      height: auto;
+      // height: auto;
+      // height: 2*$height;
+      max-height: 4*$height;
     }
   }
 
   @keyframes collapseback {
     0% {
-      height: auto;
+      // height: auto;
+      // height: 2*$height;
+      max-height: 4*$height;
     }
 
     100% {
-      height: $height;
+      // height: $height;
+      max-height: $height;
     }
   }
 
@@ -91,7 +97,9 @@ $positiveHeight: -180px;
   }
 
   .itemFront {
-    height: $height;
+    // height: $height;
+    min-height: $height;
+    max-height: $height;
     padding: 15px;
     font-size: 18px;
     color: #fff;
@@ -102,7 +110,9 @@ $positiveHeight: -180px;
   }
 
   .itemBack {
-    height: $height;
+    // height: $height;
+    min-height: $height;
+    max-height: $height;
     padding: 15px;
     font-size: 18px;
     color: #fff;
