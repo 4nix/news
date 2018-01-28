@@ -49,6 +49,7 @@ $positiveHeight: -180px;
   .item {
     margin-bottom: 10px;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
   }
 
   .toback {
@@ -84,6 +85,7 @@ $positiveHeight: -180px;
     background-color: $color;
     z-index: 11;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .itemBack {
@@ -97,6 +99,7 @@ $positiveHeight: -180px;
     z-index: 10;
     transform: rotateY(-180deg);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .title {
