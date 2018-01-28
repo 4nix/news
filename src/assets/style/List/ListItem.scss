@@ -1,0 +1,127 @@
+$color: green;
+$bgcolor: #09F768;
+$height: 150px;
+$positiveHeight: -180px;
+
+:local {
+  @keyframes reverseback {
+    100% {
+      transform: rotateY(180deg);
+    }
+  }
+
+  @keyframes reversefront {
+    0% {
+      transform: rotateY(180deg);
+    }
+
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+
+  @keyframes expandback {
+    0% {
+      // height: $height;
+      max-height: $height;
+    }
+
+    100% {
+      // height: auto;
+      // height: 2*$height;
+      max-height: 4*$height;
+    }
+  }
+
+  @keyframes collapseback {
+    0% {
+      // height: auto;
+      // height: 2*$height;
+      max-height: 4*$height;
+    }
+
+    100% {
+      // height: $height;
+      max-height: $height;
+    }
+  }
+
+  .item {
+    margin-bottom: 10px;
+    transform-style: preserve-3d;
+  }
+
+  .toback {
+    :global {
+      animation: reverseback .6s linear forwards;
+    }
+  }
+
+  .tofront {
+    :global {
+      animation: reversefront .6s linear forwards;
+    }
+  }
+
+  .expandback {
+    :global {
+      animation: expandback .6s linear forwards;
+    }
+  }
+
+  .collapseback {
+    :global {
+      animation: collapseback .6s linear forwards;
+    }
+  }
+
+  .itemFront {
+    min-height: $height;
+    max-height: $height;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
+    background-color: $color;
+    z-index: 11;
+    backface-visibility: hidden;
+  }
+
+  .itemBack {
+    min-height: $height;
+    max-height: $height;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
+    background-color: $bgcolor;
+    margin-top: $positiveHeight;
+    z-index: 10;
+    transform: rotateY(-180deg);
+    backface-visibility: hidden;
+  }
+
+  .title {
+    height: $height/2;
+    margin: 0;
+  }
+
+  .dash {
+    width: 30%;
+    border-top: 1px solid #fff;
+    height: 4px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .from {
+    font-size: 14px;
+    height: $height/4;
+    text-align: right;
+  }
+
+  .date {
+    font-size: 14px;
+    text-align: right;
+    height: $height/4;
+  }
+}
+

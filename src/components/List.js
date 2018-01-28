@@ -6,7 +6,7 @@ import config from '../config'
 class List extends Component {
   constructor (props) {
     super(props)
-    this.state = { list: [], page: 1 }
+    this.state = { list: [], page: 1, val: 0 }
   }
 
   // fetchData () {
@@ -35,18 +35,33 @@ class List extends Component {
   }
 
   componentWillMount () {
-    console.log('will')
     this.fetchData()
   }
 
   componentDidMount () {
-    console.log('did')
+    this.setState({val: this.state.val + 1})
+    console.log('1:', this.state.val)
+
+    this.setState({val: this.state.val + 1})
+    console.log('2:', this.state.val)
+
+    this.setState({val: this.state.val + 1})
+    console.log('2:', this.state.val)
+
+    setTimeout( () => {
+      console.log('3:', this.state.val)
+      this.setState({val: this.state.val + 1})
+      console.log('3:', this.state.val)
+
+      this.setState({val: this.state.val + 1})
+      console.log('4:', this.state.val)
+    })
     
     document.body.onscroll = () => {
       let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
 
       if (scrollTop >= document.body.scrollHeight - window.innerHeight) {
-        console.log(scrollTop, document.body.scrollHeight - window.innerHeight)
+        // console.log(scrollTop, document.body.scrollHeight - window.innerHeight)
         // this.fetchData()
       }
       
