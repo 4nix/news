@@ -44,7 +44,7 @@ class ListItem extends Component {
   }
 
   setToBack () {
-    console.log(ListItemActions.itemToBack)
+    // console.log(ListItemActions.itemToBack)
     // this.props.dispatch(ListItemActions.itemToBack)
     this.setState({ class: style.toback, reverse: true })
   }
@@ -110,10 +110,10 @@ class ListItem extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { ListItemReducer } = state
-  return { card: ListItemReducer }
-}
+// const mapStateToProps = (state) => {
+//   const { ListItemReducer } = state
+//   return { card: ListItemReducer }
+// }
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
@@ -121,4 +121,4 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-export default connect(mapStateToProps)(ListItem)
+export default connect()(ListItem)

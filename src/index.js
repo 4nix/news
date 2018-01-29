@@ -10,8 +10,8 @@ import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 
 import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom'
-import List from './views/List'
-import Datepick from './views/Datepick'
+// import List from './views/List'
+// import Datepick from './views/Datepick'
 
 const middleware = [ thunk ]
 
@@ -27,7 +27,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <List />
+    { routes() }
   </Provider>, 
   document.getElementById('root'));
 // registerServiceWorker();

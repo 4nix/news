@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { ListReducer } from './ListReducer'
-import { ListItemReducer } from './List/ListItemReducer'
 
 // const def = {
 //   loading: true,
@@ -26,8 +25,7 @@ import { ListItemReducer } from './List/ListItemReducer'
 const postTags = (state = {}, action) => { return 1 }
 
 const rootReducer = combineReducers({
-  ListReducer,
-  ListItemReducer
+  ListReducer
 })
 
 export default rootReducer
