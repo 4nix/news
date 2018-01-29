@@ -1,17 +1,30 @@
 import config from '../config'
 
-export const getList = (list, page = 1) => dispatch => {
-  return dispatch(fetchPost('', page))
+export const getList = (page = 1, pagesize = 5) => dispatch => {
+  return dispatch(fetchPost('', page, pagesize))
 }
 
-export const reciveData = json => ({
+export const reciveData = (json, page, pagesize) => ({
   type: 'GET_LIST',
+  page: page,
+  pagesize: pagesize,
   list: json
 })
 
-const fetchPost = (url, page) => dispatch => {
+const fetchPost = (url, page, pagesize) => dispatch => {
   return fetch(config.api).then(resposne => resposne.json()).then(json => {
-    dispatch(reciveData(json))
+    let result = []
+    let start = (page - 1) * pagesize
+    let end = start + pagesize
+    for (let k in json) {
+      if (k >= start) {
+        if (k >= end) {
+          break
+        }
+        result.push(json[k])
+      }
+    }
+    dispatch(reciveData(result, page, pagesize))
   })
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import style from '../../assets/style/List/ListItem.scss'
+import * as ListItemActions from '../../actions/List/ListItem'
 
 class ListItem extends Component {
   constructor (props) {
@@ -38,18 +39,23 @@ class ListItem extends Component {
   }
 
   setToFront () {
+    // this.props.dispatch(ListItemActions.itemToFront)
     this.setState({ class: style.tofront, reverse: false })
   }
 
   setToBack () {
+    console.log(ListItemActions.itemToBack)
+    // this.props.dispatch(ListItemActions.itemToBack)
     this.setState({ class: style.toback, reverse: true })
   }
 
   setExpand () {
+    // this.props.dispatch(ListItemActions.itemToCollapse)
     this.setState({ backClass: style.expandback, expand: true, content: this.props.item.content, })
   }
 
   setCollapse () {
+    // this.props.dispatch(ListItemActions.itemToFold)
     this.setState({ backClass: style.collapseback, expand: false, content: this.formateContent(this.props.item.content) })
   }
 
@@ -77,6 +83,8 @@ class ListItem extends Component {
   }
 
   render () {
+    // console.log(this.props.card, this.props.in)
+
     return (
       <div className={ style.item + ' ' + this.state.class } onClick={ e => this.handleClick(e) }>
         <div className={style.itemFront}>
